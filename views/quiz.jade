@@ -1,0 +1,27 @@
+extends layout
+
+block scripts
+    script(type='text/javascript', src="javascripts/timer.js")
+    script(type='text/javascript', src="javascripts/quiz.js")
+    script(type='text/javascript', src="javascripts/mustache.js")
+    script(type='text/javascript', src="javascripts/controller.js")
+    script.
+        new Controller(!{data}).execute();
+
+block content
+    div
+        - for(var i = 0; i < questions; i+=1) {
+            div(id="timer_#{i}", class="timer")= 10
+        -}
+    div(class='clear')
+    div(id='content')
+
+    input(type='button', id='next')
+
+    script(id='template', type='x-tmpl-mustache')
+        div(class='question')='{{text}}'
+            {{#answers}}
+            div(class='answer')
+                input(type='radio', name='answer', value='{{id}}')
+                label= '{{text}}'
+            {{/answers}}
