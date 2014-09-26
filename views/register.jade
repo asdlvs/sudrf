@@ -1,16 +1,30 @@
 extends layout
 block content
-    h1= Регистрация
-    form(action='/quiz', method='POST')
-        div
-            label(for='firstname')= 'Фамилия'
-            input(type='text', name='firstname', id='firstname')
-        div
-            label(for='lastname')= 'Имя'
-            input(type='text', name='lastname', id='lastname')
-        div
-            label(for='roleId')= 'Роль'
-            input(type='text', name='roleId', id='roleId')
-        div
-            input(type='submit')
+    h1(class='title')= 'Регистрация'
+    div(class='register')
+        form(action='/quiz', method='POST')
+            div(class='inputblock')
+                div(class='label')
+                    label(for='firstname')= 'Фамилия:'
+                div(class='input')
+                    input(type='text', name='firstname', id='firstname')
+
+            div(class='clear')
+
+            div(class='inputblock')
+                div(class='label')
+                    label(for='lastname')= 'Имя:'
+                div(class='input')
+                    input(type='text', name='lastname', id='lastname')
+
+            div(class='clear')
+
+            div(class='inputblock roles')
+                - each role in roles
+                    div
+                        input(type='radio', name='roleId', value='#{role.id}')
+                        label(for='roleId')= role.value
+
+            div(class='start')
+                input(type='submit', value='Начать')
 

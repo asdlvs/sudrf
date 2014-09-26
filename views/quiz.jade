@@ -9,18 +9,19 @@ block scripts
         new Controller(!{data}).execute();
 
 block content
-    div= firstname + ' ' + lastname
-    div
+    h1(class='title')= firstname + ' ' + lastname
+    span(class='timers')
         - for(var i = 0; i < questions; i+=1) {
-            div(id="timer_#{i}", class="timer")= 10
+            div(id="timer_#{i}", class="timer")= '-'
         -}
     div(class='clear')
     div(id='content')
 
-    input(type='button', id='next')
+    input(type='button', id='next', value='Ответить')
 
     script(id='template', type='x-tmpl-mustache')
-        div(class='question')='{{text}}'
+        div(class='step')
+            div(class='question')='{{text}}'
             {{#answers}}
             div(class='answer')
                 input(type='radio', name='answer', value='{{id}}', id='answer_{{id}}')

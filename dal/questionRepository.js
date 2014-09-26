@@ -25,7 +25,18 @@ module.exports = (function () {
                 if (err) {
                     throw err;
                 }
-                callback(rows);
+                var roles = [];
+                for(var i = 0; i < rowcount; i += 1) {
+                    var row = rows[i],
+                        id = row[0].value,
+                        value = row[1].value;
+
+                    roles.push({
+                        id: id,
+                        value: value
+                    });
+                }
+                callback(roles);
             }));
         });
     };
@@ -84,7 +95,7 @@ module.exports = (function () {
             lastname = obj.lastname,
             answers = JSON.parse("[" + obj.answers + "]");
 
-        
+
     };
 
     return QuestionRepository;

@@ -1,14 +1,22 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Exo 2', sans-serif;
+  background-color: #ecf0f1;
+  color: #2d3e50;
 }
 a {
   color: #00b7ff;
 }
+.content {
+  text-align: center;
+}
 .timer {
   size: 40px;
   float: left;
-  border: 1px solid #f00;
+  border-color: #27ae61;
+  background-color: #2fcc71;
+  color: #ecf0f1;
   height: 40px;
   width: 40px;
   line-height: 40px;
@@ -16,11 +24,63 @@ a {
   margin: 5px 5px 5px 5px;
 }
 .timer-end {
-  border-color: #008000;
+  border-color: #808b8d;
+  background-color: #96a6a6;
+  color: #bec3c7;
 }
 .timer-active {
-  border-color: #ff0;
+  border-color: #d55401;
+  background-color: #e77e23;
+  color: #ecf0f1;
+}
+.timers {
+  display: inline-block;
+  padding: 20px 10px 40px 10px;
 }
 .clear {
   clear: both;
+}
+.title {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 30px;
+}
+.step {
+  width: 800px;
+  display: inline-block;
+}
+.question {
+  font-size: 20px;
+  padding-bottom: 20px;
+}
+.answer {
+  text-align: left;
+  padding: 0 20px 20px 20px;
+}
+.inputblock {
+  padding: 10px 10px 5px 10px;
+}
+.label {
+  float: left;
+  width: 100px;
+  line-height: 30px;
+}
+.input {
+  float: left;
+  width: 200px;
+  line-height: 30px;
+}
+.input input {
+  width: 190px;
+  height: 30px;
+}
+.register {
+  border: 1px solid #a78d6c;
+  background-color: #dcdad2;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 10px;
+  text-align: left;
+}
+.start {
+  padding: 10px 10px 5px 10px;
 }

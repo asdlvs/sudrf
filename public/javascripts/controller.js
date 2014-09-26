@@ -1,6 +1,6 @@
 var Controller = (function () {
     function Controller(questions) {
-        this.timer = new Timer(10);
+        this.timer = new Timer(60);
         this.quiz = new Quiz(questions);
         this.prefix = 'timer_';
     };
@@ -20,6 +20,7 @@ var Controller = (function () {
                 self.timer.reset();
                 timerBlock.classList.remove('timer-active');
                 timerBlock.classList.add('timer-end');
+                timerBlock.innerHTML = 'x';
                 var question = self.quiz.next();
                 if (question) {
                     self.execute();
@@ -34,6 +35,7 @@ var Controller = (function () {
 
         output.innerHTML = Mustache.render(template, self.quiz.getQuestion());
         timerBlock.classList.add('timer-active');
+        timerBlock.innerHTML = this.timer.seconds;
 
         self.timer.remove('tick');
         this.timer.on('tick', function (value) {
