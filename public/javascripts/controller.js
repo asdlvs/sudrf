@@ -5,7 +5,7 @@ var Controller = (function () {
         this.prefix = 'timer_';
     };
 
-    var  doc = document,
+    var doc = document,
         template = doc.getElementById('template').innerHTML,
         output = doc.getElementById('content');
 
@@ -24,7 +24,11 @@ var Controller = (function () {
                 if (question) {
                     self.execute();
                 } else {
-                    console.log(self.quiz.answers);
+                    var xhr = (window.ActiveXObject) ? new ActiveXObject("Microsoft.XMLHTTP") : (XMLHttpRequest && new XMLHttpRequest()) || null;
+                    xhr.open('POST', '/quiz/send', false);
+                    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    xhr.send('answers='+ self.quiz.answers);
+                    document.location = '/result';
                 }
             };
 

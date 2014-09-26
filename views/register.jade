@@ -1,0 +1,16 @@
+extends layout
+block content
+    h1= Регистрация
+    form(action='/quiz', method='POST')
+        div
+            label(for='firstname')= 'Фамилия'
+            input(type='text', name='firstname', id='firstname')
+        div
+            label(for='lastname')= 'Имя'
+            input(type='text', name='lastname', id='lastname')
+        div
+            label(for='roleId')= 'Роль'
+            input(type='text', name='roleId', id='roleId')
+        div
+            input(type='submit')
+

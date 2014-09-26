@@ -78,5 +78,14 @@ module.exports = (function () {
         });
     };
 
+    QuestionRepository.prototype.save = function(obj, callback) {
+        var roleId = obj.roleId,
+            firstname = obj.firstname,
+            lastname = obj.lastname,
+            answers = JSON.parse("[" + obj.answers + "]");
+
+        
+    };
+
     return QuestionRepository;
 })();

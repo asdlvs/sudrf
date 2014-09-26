@@ -1,14 +1,15 @@
 extends layout
 
 block scripts
-    script(type='text/javascript', src="javascripts/timer.js")
-    script(type='text/javascript', src="javascripts/quiz.js")
-    script(type='text/javascript', src="javascripts/mustache.js")
-    script(type='text/javascript', src="javascripts/controller.js")
+    script(type='text/javascript', src="/javascripts/timer.js")
+    script(type='text/javascript', src="/javascripts/quiz.js")
+    script(type='text/javascript', src="/javascripts/mustache.js")
+    script(type='text/javascript', src="/javascripts/controller.js")
     script.
         new Controller(!{data}).execute();
 
 block content
+    div= firstname + ' ' + lastname
     div
         - for(var i = 0; i < questions; i+=1) {
             div(id="timer_#{i}", class="timer")= 10
@@ -22,6 +23,6 @@ block content
         div(class='question')='{{text}}'
             {{#answers}}
             div(class='answer')
-                input(type='radio', name='answer', value='{{id}}')
-                label= '{{text}}'
+                input(type='radio', name='answer', value='{{id}}', id='answer_{{id}}')
+                label(for='answer_{{id}}')= '{{text}}'
             {{/answers}}
