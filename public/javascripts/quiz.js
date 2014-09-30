@@ -1,8 +1,8 @@
 var Quiz = (function() {
-    function Quiz(questions) {
+    function Quiz(questions, index) {
         this.questions = questions;
         this.count = questions.length;
-        this.index = 0;
+        this.index = index || 0;
         this.answers = [];
     };
 

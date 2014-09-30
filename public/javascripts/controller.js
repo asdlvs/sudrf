@@ -1,8 +1,10 @@
 var Controller = (function () {
-    function Controller(questions) {
+    function Controller(questions, guid, number) {
         this.timer = new Timer(60);
-        this.quiz = new Quiz(questions);
+        this.quiz = new Quiz(questions, number);
+        this.notifier = new Notifier(guid);
         this.prefix = 'timer_';
+        this.guid = guid;
     };
 
     var doc = document,
@@ -17,6 +19,9 @@ var Controller = (function () {
                 var answer = doc.querySelector('input[name="answer"]:checked');
                 answer = answer && answer.value;
                 self.quiz.answer(answer);
+
+                self.notifier.answer(self.quiz.getQuestion().id, answer);
+
                 self.timer.reset();
                 timerBlock.classList.remove('timer-active');
                 timerBlock.classList.add('timer-end');
@@ -31,7 +36,20 @@ var Controller = (function () {
                     xhr.send('answers='+ self.quiz.answers);
                     document.location = '/result';
                 }
+            },
+            prepare = function() {
+                if(self.quiz.index > 0) {
+                    for(var i = 0, length = self.quiz.index; i < length; i += 1) {
+                        var finished = doc.getElementById(self.prefix + i);
+                        finished.classList.add('timer-end');
+                        finished.innerHTML = 'x';
+                    }
+                }
+
+                self.notifier.next(self.quiz.index);
             };
+
+        prepare();
 
         output.innerHTML = Mustache.render(template, self.quiz.getQuestion());
         timerBlock.classList.add('timer-active');

@@ -1,17 +1,9 @@
-var TDS = require('tedious');
+var TDS = require('tedious'),
+    config = require('./dbConfig');
 
 module.exports = (function () {
     function QuestionRepository() {
-        this.config = {
-            userName: 'asdlvs@jozqeasimj.database.windows.net',
-            password: '12345666Qa!',
-            server: 'jozqeasimj.database.windows.net',
-            options: {
-                database: 'sudrf',
-                rowCollectionOnRequestCompletion: true,
-                encrypt: true
-            }
-        };
+        this.config = config;
     };
 
     QuestionRepository.prototype.roles = function (callback) {
@@ -26,7 +18,7 @@ module.exports = (function () {
                     throw err;
                 }
                 var roles = [];
-                for(var i = 0; i < rowcount; i += 1) {
+                for (var i = 0; i < rowcount; i += 1) {
                     var row = rows[i],
                         id = row[0].value,
                         value = row[1].value;
@@ -89,13 +81,50 @@ module.exports = (function () {
         });
     };
 
-    QuestionRepository.prototype.save = function(obj, callback) {
-        var roleId = obj.roleId,
-            firstname = obj.firstname,
-            lastname = obj.lastname,
-            answers = JSON.parse("[" + obj.answers + "]");
+    QuestionRepository.prototype.answer = function(obj){
+        if (obj.answer === -1) {
+            return
+        }
 
+        var cnn = new TDS.Connection(this.config);
+        cnn.on('connect', function(err) {
+            if (err) {
+                throw err;
+            }
+            var answerCmd = 'INSERT INTO [dbo].[Results] ([PersonGuid], [QuestionId], [AnswerId])'
+                + ' VALUES (@guid, @question, @answer)';
 
+            var answerRequest = new TDS.Request(answerCmd, function(err) {
+                if (err) {
+                    throw err;
+                }
+            });
+
+            answerRequest.addParameter('guid', TDS.TYPES.UniqueIdentifier, obj.guid);
+            answerRequest.addParameter('question', TDS.TYPES.Int, obj.question);
+            answerRequest.addParameter('answer', TDS.TYPES.Int, obj.answer);
+
+            cnn.execSql(answerRequest);
+        });
+    };
+
+    QuestionRepository.prototype.updateNumber = function(guid, number) {
+        var cnn = new TDS.Connection(this.config);
+        cnn.on('connect', function(err) {
+            if (err) {
+                throw err;
+            }
+            var updatecountCmd = 'UPDATE [dbo].[Persons] SET QuestionNumber = @number WHERE Guid = @guid';
+            var updateRequest = new TDS.Request(updatecountCmd, function (err) {
+                if (err) {
+                    throw err;
+                }
+            });
+
+            updateRequest.addParameter('number', TDS.TYPES.Int, number + 1);
+            updateRequest.addParameter('guid', TDS.TYPES.UniqueIdentifier, guid);
+            cnn.execSql(updateRequest);
+        });
     };
 
     return QuestionRepository;

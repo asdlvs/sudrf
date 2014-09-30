@@ -4,9 +4,10 @@ block scripts
     script(type='text/javascript', src="/javascripts/timer.js")
     script(type='text/javascript', src="/javascripts/quiz.js")
     script(type='text/javascript', src="/javascripts/mustache.js")
+    script(type='text/javascript', src="/javascripts/notifier.js")
     script(type='text/javascript', src="/javascripts/controller.js")
     script.
-        new Controller(!{data}).execute();
+        new Controller(!{data}, '!{guid}', !{number}).execute();
 
 block content
     h1(class='title')= firstname + ' ' + lastname
