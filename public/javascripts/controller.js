@@ -31,9 +31,9 @@ var Controller = (function () {
                     self.execute();
                 } else {
                     var xhr = (window.ActiveXObject) ? new ActiveXObject("Microsoft.XMLHTTP") : (XMLHttpRequest && new XMLHttpRequest()) || null;
-                    xhr.open('POST', '/quiz/send', false);
+                    xhr.open('POST', '/quiz/last', false);
                     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    xhr.send('answers='+ self.quiz.answers);
+                    xhr.send('guid='+ self.guid);
                     document.location = '/result';
                 }
             },

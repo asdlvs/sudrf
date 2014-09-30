@@ -93,5 +93,24 @@ module.exports = (function () {
         });
     };
 
+    UserRepository.prototype.last = function(guid) {
+        var cnn = new TDS.Connection(this.config);
+        cnn.on('connect', function(err) {
+            if (err) {
+                throw err;
+            }
+
+            var cmd = "UPDATE [dbo].[Persons] SET IsFinished = 1 WHERE Guid = @guid";
+            var request = new TDS.Request(cmd, function(err) {
+                if (err) {
+                    throw err;
+                }
+            });
+
+            request.addParameter('guid', TDS.TYPES.UniqueIdentifier, guid);
+            cnn.execSql(request);
+        });
+    };
+
     return UserRepository;
 })();
