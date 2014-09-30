@@ -12,7 +12,6 @@ a {
   text-align: center;
 }
 .timer {
-  size: 40px;
   float: left;
   border-color: #27ae61;
   background-color: #2fcc71;
@@ -83,4 +82,12 @@ a {
 }
 .start {
   padding: 10px 10px 5px 10px;
+}
+.alert {
+  color: #f00;
+  font-size: 25px;
+  display: none;
+}
+.alert_visible {
+  display: block;
 }

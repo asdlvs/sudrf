@@ -1,6 +1,14 @@
 extends layout
+
+block scripts
+    script(type='text/javascript', src="/javascripts/register.js")
+
 block content
     h1(class='title')= 'Регистрация'
+
+    div(class='alert', id='alert')
+        p Вы ввели не все необходимые данные!
+
     div(class='register')
         form(action='/quiz', method='POST')
             input(type='hidden', name='guid', value='#{guid}')
@@ -51,5 +59,5 @@ block content
                         label(for='role_#{role.id}')= role.value
 
             div(class='start')
-                input(type='submit', value='Начать')
+                input(type='submit', value='Начать', id='start')
 
