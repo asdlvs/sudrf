@@ -91,3 +91,12 @@ a {
 .alert_visible {
   display: block;
 }
+.start {
+  width: 150px;
+  margin: 0 auto;
+}
+.start-btn,
+.next-btn {
+  width: 150px;
+  height: 50px;
+}

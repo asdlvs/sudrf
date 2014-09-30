@@ -13,7 +13,8 @@
             || !lastname.value.trim()
             || !fathername.value.trim()
             || !position.value.trim()
-            || !place.value.trim() || !role) {
+            || !place.value.trim()
+            || !role) {
             alert.classList.add('alert_visible');
             e.preventDefault();
         }
