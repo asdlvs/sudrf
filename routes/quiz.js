@@ -40,7 +40,7 @@ router.route('/').post(function (req, res) {
 
     pr.getUser(req.body.guid, function (user) {
         if (!user) {
-            pr.nameExists(req.body.firstname, req.body.lastname, req.body.fathername, function (exists) {
+            pr.nameExists(req.body.firstname, req.body.lastname, req.body.fathername, req.body.phone, function (exists) {
                 if (exists) {
                     res.render('Already', {
                         firstname: req.body.firstname,

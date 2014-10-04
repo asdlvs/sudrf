@@ -4,7 +4,7 @@
         firstname = doc.getElementById('firstname'),
         lastname = doc.getElementById('lastname'),
         fathername = doc.getElementById('fathername'),
-        position = doc.getElementById('position'),
+        phone = doc.getElementById('phone'),
         place = doc.getElementById('place'),
         alert = doc.getElementById('alert');
     startBtn.addEventListener('click', function (e) {
@@ -12,7 +12,7 @@
         if (!firstname.value.trim()
             || !lastname.value.trim()
             || !fathername.value.trim()
-            || !position.value.trim()
+            || !phone.value.trim()
             || !place.value.trim()
             || !role) {
             alert.classList.add('alert_visible');

@@ -14,7 +14,7 @@ block content
             input(type='hidden', name='guid', value='#{guid}')
             div(class='inputblock')
                 div(class='label')
-                    label(for='firstname')= 'Фамилия:'
+                    label(for='firstname')= 'Фамилия(*):'
                 div(class='input')
                     input(type='text', name='firstname', id='firstname')
 
@@ -22,7 +22,7 @@ block content
 
             div(class='inputblock')
                 div(class='label')
-                    label(for='lastname')= 'Имя:'
+                    label(for='lastname')= 'Имя(*):'
                 div(class='input')
                     input(type='text', name='lastname', id='lastname')
 
@@ -30,7 +30,7 @@ block content
 
             div(class='inputblock')
                 div(class='label')
-                    label(for='fathername')= 'Отчество:'
+                    label(for='fathername')= 'Отчество(*):'
                 div(class='input')
                     input(type='text', name='fathername', id='fathername')
 
@@ -38,19 +38,30 @@ block content
 
             div(class='inputblock')
                 div(class='label')
-                    label(for='position')= 'Должность:'
+                    label(for='phone')= 'Телефон(*):'
                 div(class='input')
-                    input(type='text', name='position', id='position')
+                    input(type='text', name='phone', id='phone')
 
             div(class='clear')
 
             div(class='inputblock')
                 div(class='label')
-                    label(for='place')= 'Место:'
+                    label(for='mail')= 'E-mail:'
+                div(class='input')
+                    input(type='text', name='mail', id='mail')
+
+            div(class='clear')
+
+            div(class='inputblock')
+                div(class='label')
+                    label(for='place')= 'Суд/Судебный участок(*):'
                 div(class='input')
                     input(type='text', name='place', id='place')
 
             div(class='clear')
+
+            div
+                p Поля, помеченные звёздочкой (*) являются обязательными для заполнения.
 
             div(class='inputblock roles')
                 - each role in roles

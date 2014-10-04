@@ -13,8 +13,8 @@ module.exports = (function () {
                 throw err;
             }
             var cmd = "INSERT INTO [dbo].[Persons] "
-                + "(Firstname, Lastname, Fathername, Guid, Position, Place)"
-                + "VALUES (@Firstname, @Lastname, @Fathername, @Guid, @Position, @Place)";
+                + "(Firstname, Lastname, Fathername, Guid, Phone, Mail, Place)"
+                + "VALUES (@Firstname, @Lastname, @Fathername, @Guid, @Phone, @Mail, @Place)";
 
             var request = new TDS.Request(cmd, function (err) {
                 if (err) {
@@ -29,7 +29,8 @@ module.exports = (function () {
             request.addParameter('Lastname', TDS.TYPES.NVarChar, user.lastname.trim());
             request.addParameter('Fathername', TDS.TYPES.NVarChar, user.fathername.trim());
             request.addParameter('Guid', TDS.TYPES.UniqueIdentifier, user.guid);
-            request.addParameter('Position', TDS.TYPES.NVarChar, user.position);
+            request.addParameter('Phone', TDS.TYPES.NVarChar, user.phone);
+            request.addParameter('Mail', TDS.TYPES.NVarChar, user.mail);
             request.addParameter('Place', TDS.TYPES.NVarChar, user.place);
 
             cnn.execSql(request);
@@ -43,7 +44,7 @@ module.exports = (function () {
                 throw err;
             }
 
-            var cmd = "SELECT [Id], [Firstname], [Lastname], [Fathername], [Guid], [Position], [Place], [QuestionNumber]"
+            var cmd = "SELECT [Id], [Firstname], [Lastname], [Fathername], [Guid], [Phone], [Mail], [Place], [QuestionNumber]"
                 + " FROM [dbo].[Persons] WHERE Guid = @Guid";
             var request = new TDS.Request(cmd, function (err, rowcount, rows) {
                 if (err) {
@@ -58,9 +59,10 @@ module.exports = (function () {
                     lastname: userRow[2].value,
                     fathername: userRow[3].value,
                     guid: userRow[4].value,
-                    position: userRow[5].value,
-                    place: userRow[6].value,
-                    number: userRow[7].value
+                    phone: userRow[5].value,
+                    mail: userRow[6].value,
+                    place: userRow[7].value,
+                    number: userRow[8].value
                 })
             });
 
@@ -69,14 +71,14 @@ module.exports = (function () {
         });
     };
 
-    UserRepository.prototype.nameExists = function(firstname, lastname, fathername, callback) {
+    UserRepository.prototype.nameExists = function(firstname, lastname, fathername, phone, callback) {
         var cnn = new TDS.Connection(this.config);
         cnn.on('connect', function(err) {
             if (err) {
                 throw err;
             }
 
-            var cmd = "SELECT * FROM [dbo].[Persons] WHERE Firstname = @firstname AND Lastname = @lastname AND @Fathername = @fathername";
+            var cmd = "SELECT * FROM [dbo].[Persons] WHERE Firstname = @firstname AND Lastname = @lastname AND Fathername = @fathername AND Phone = @phone";
             var request = new TDS.Request(cmd, function(err, rowcount) {
                 if (err) {
                     throw err;
@@ -88,6 +90,7 @@ module.exports = (function () {
             request.addParameter('firstname', TDS.TYPES.NVarChar, firstname);
             request.addParameter('lastname', TDS.TYPES.NVarChar, lastname);
             request.addParameter('fathername', TDS.TYPES.NVarChar, fathername);
+            request.addParameter('phone', TDS.TYPES.NVarChar, phone);
 
             cnn.execSql(request);
         });
