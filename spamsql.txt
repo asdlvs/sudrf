@@ -1,0 +1,22 @@
+SELECT
+   [P].[Firstname],
+   [P].[Lastname],
+   [P].[Fathername],
+   [P].[Guid],
+   [P].[Phone],
+   [P].[Mail],
+   [P].[Place]
+FROM [dbo].[Persons] AS [P] WHERE [P].[IsFinished] = 1 AND [P].[IsDelivered] = 0
+
+SELECT
+[Q].[Text],
+[A].[Text],
+[A].[IsCorrect]
+FROM [dbo].[Results] AS [R]
+LEFT JOIN [dbo].[Questions] AS [Q]
+ON [R].[QuestionId] = [Q].[Id]
+LEFT JOIN [dbo].[Answers] AS [A]
+ON [R].[AnswerId] = [A].[Id]
+WHERE [R].[PersonGuid] = 'c8701f60-4c0b-11e4-a5f0-e5849a3be455'
+
+
